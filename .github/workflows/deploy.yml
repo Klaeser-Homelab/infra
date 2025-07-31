@@ -11,7 +11,7 @@ jobs:
     runs-on: self-hosted
 
     env:
-      DOCKER_HOST: tcp://10.0.0.49:2375
+      DOCKER_HOST: tcp://10.0.0.35:2375
 
     steps:
       - name: Checkout code
