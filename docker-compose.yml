@@ -2,13 +2,12 @@ version: '3.8'
 
 services:
   nginx-proxy:
-    image: nginx:alpine
+    build: .
     container_name: main-proxy
     ports:
       - "80:80"
       - "443:443"
     volumes:
-      - ./nginx/conf.d:/etc/nginx/conf.d:ro
       - /etc/letsencrypt:/etc/letsencrypt:ro
     networks:
       - proxy-network
