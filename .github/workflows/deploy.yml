@@ -1,0 +1,33 @@
+name: Deploy Proxy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Deploy Nginx Proxy
+    runs-on: self-hosted
+
+    env:
+      DOCKER_HOST: tcp://10.0.0.49:2375
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Create proxy network if not exists
+        run: |
+          docker network create proxy-network || true
+
+      - name: Deploy proxy
+        run: |
+          docker compose down || true
+          docker compose up -d
+
+      - name: Verify deployment
+        run: |
+          sleep 5
+          docker ps | grep main-proxy
+          docker logs main-proxy --tail 20
