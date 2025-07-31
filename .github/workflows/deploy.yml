@@ -17,10 +17,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Create proxy network if not exists
-        run: |
-          docker network create proxy-network || true
-
       - name: Deploy proxy
         run: |
           docker compose down || true
@@ -30,4 +26,6 @@ jobs:
         run: |
           sleep 5
           docker ps | grep main-proxy
+          docker ps | grep dnsmasq-server
           docker logs main-proxy --tail 20
+          docker logs dnsmasq-server --tail 20
