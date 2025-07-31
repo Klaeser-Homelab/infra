@@ -1,9 +1,8 @@
 version: '3.8'
 
 services:
-  # Nginx reverse proxy
   nginx-proxy:
-    build: ./proxy
+    build: .
     container_name: main-proxy
     ports:
       - "80:80"
@@ -19,28 +18,7 @@ services:
       timeout: 10s
       retries: 3
 
-  # DNS server
-  dnsmasq:
-    build: ./dns
-    container_name: dnsmasq-server
-    ports:
-      - "53:53/udp"
-      - "53:53/tcp"
-    networks:
-      - dns-network
-    restart: unless-stopped
-    cap_add:
-      - NET_ADMIN
-    healthcheck:
-      test: ["CMD", "nslookup", "google.com", "localhost"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-
 networks:
   proxy-network:
     name: proxy-network
-    external: true
-  dns-network:
-    name: dns-network
     external: true
