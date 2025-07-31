@@ -40,7 +40,5 @@ services:
 networks:
   proxy-network:
     name: proxy-network
-    external: true
   dns-network:
     name: dns-network
-    external: true
