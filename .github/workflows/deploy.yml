@@ -17,12 +17,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Deploy proxy
+      - name: Deploy
         run: |
           docker compose down || true
           docker compose up -d
 
-      - name: Verify deployment
+      - name: Verify
         run: |
           sleep 5
           docker ps | grep main-proxy
