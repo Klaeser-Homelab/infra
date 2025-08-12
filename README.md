@@ -1,8 +1,22 @@
-# Proxy Server
+# Infrastructure Services
+
+Core infrastructure services for the homelab.
+
+## Docker Registry
+
+Private Docker registry for storing container images.
+
+To set up the Docker registry:
+```bash
+cd registry
+./setup-registry.sh
+```
+
+## Proxy Server
 
 Centralized nginx reverse proxy for routing multiple domains to different Docker containers.
 
-## Setup
+### Setup
 
 1. Ensure the proxy network exists:
    ```bash
